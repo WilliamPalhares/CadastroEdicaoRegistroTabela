@@ -1,0 +1,104 @@
+#divPainel {
+	margin-left: 13%;
+	margin-top: 10%;
+}
+
+#divPainel2 {
+	margin-left: 13%;
+	margin-top: 2%;
+}
+
+#divPainel, #divPainel2 {
+	width: 1000px;
+}
+
+#txtDescricaoFiltro { 
+	margin-left: -5px;
+}
+
+#txtTipoFiltro {
+	margin-left: -9px;
+}
+
+#sendCadastrar {
+	margin-left: 94px;
+}
+
+#txtCalendario, #txtDescricao, #selTipo {
+	width: 160px;
+}
+
+.btn {
+	margin-left: 12px;
+}
+
+.col-md-3 {
+	display: inline-flex !important;
+}
+
+.lblInputCalendario, .lblDescricao, .lblInputTipo {
+	margin-top: 7px !important; 
+	margin-right: 15px !important; 
+}
+
+.lblInputCalendario {
+	margin-left: 20px !important;
+}
+
+.lblInputTipo {
+	margin-left: 15px !important; 
+}
+
+.lblInputCalendarioModal, .lblDescricaoModal, .lblInputTipoModal {
+	margin-top: 7px !important; 
+	margin-right: 15px !important; 
+}
+
+.tab-contentArquivo {
+	/*width: 887px; 
+	margin-left: 40px;*/
+}
+
+.tab-contentArquivo > .tab-pane,
+.pill-content > .pill-pane {
+	display: none;
+}
+
+.tab-contentArquivo > .active,
+.pill-content > .active {
+	display: block;
+}
+
+#containerButton {
+	margin-bottom: 5px;
+	float: right;
+}
+
+.inner_table {
+	height: 140px !important;
+}
+
+.inner_table_result {
+	height: 100px !important;
+}
+
+.wrap {
+	width: 100%;
+	margin-bottom: 20px;
+	border-bottom: 3px solid #dddddd;
+}
+
+.wrap table {
+	width: 100%;
+	table-layout: fixed;
+}
+
+.inner_table, .inner_table_result {
+	height: 130px;
+	overflow-y: auto;
+}
+
+.modal-header {
+	background-color: #337ab7;
+	color: #fff;
+}

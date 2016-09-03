@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!-- Inicio Apontamento de Biblioteca JS -->
+    <!-- Jquery Biblioteca -->
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+
+    <!-- Jquery Biblioteca Boostrap -->
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/bootstrap-dialog.js"></script>
+	
+    <!-- Style Página -->
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<link href="css/jquery-ui.css" rel="stylesheet" />
+    <link href="css/bootstrap-dialog.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+	<link href="css/styleFeriados.css" rel="stylesheet" />
+
+	<script>
+		$(document).ready(function () {
+			//Carregando Dados para Grid
+			CarregarDados();
+			
+            //Método para implementar o calendario na input do Painel 1
+			$("#txtCalendario").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior',
+				changeMonth: true,
+				changeYear: true
+            });
+			
+			//Método para implementar o calendario na input do Painel 2
+			$("#txtCalendarioFiltro").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior',
+				changeMonth: true,
+				changeYear: true
+            });
+			
+			//Método para implementar o calendario na input na modal
+			$("#txtCalendarioModal").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior',
+				changeMonth: true,
+				changeYear: true
+            });			
+			
+			//Método para editar o registro selecionado
+			$(document).on("click", ".btn-primary", function(){
+				//Resgatando os Valores
+				var dataCadastro = $(this).closest('tr').find('td[data-datacadastro]').data('datacadastro');
+				var descricao = $(this).closest('tr').find('td[data-descricao]').data('descricao');
+				var tipo = $(this).closest('tr').find('td[data-tipo]').data('tipo');
+				
+				$('#txtCalendarioModal').val(dataCadastro);
+				$('#txtDescricaoModal').val(descricao);
+				$('#selTipoModal').val(tipo);
+				
+				//Chamada para Modal
+				$("#myModal").modal();
+			});
+			
+			//Método para filtrar as colunas de Descrição e Tipo
+			$("#cabecalho input").keyup(function(){       
+				var index = $(this).parent().index();
+				var nth = "#tabela td:nth-child("+(index+1).toString()+")";
+				var valor = $(this).val().toUpperCase();
+
+				$("#tabela tbody tr").show();
+
+				$(nth).each(function(){
+					if($(this).text().toUpperCase().indexOf(valor) < 0){
+						$(this).parent().hide();
+					}
+				});
+			});
+			
+			//Método para filtrar a coluna Data
+			$("#txtCalendarioFiltro").change(function(){       
+				var index = 1;
+				var nth = "#tabela td:nth-child("+(index).toString()+")";
+				var valor = $(this).val().toUpperCase();
+				
+				$("#tabela tbody tr").show();
+				
+				$(nth).each(function(){
+					if($(this).text().toUpperCase().indexOf(valor) < 0){
+						$(this).parent().hide();
+					}
+				});
+			});
+			
+			$("#tabela input").blur(function(){
+				$(this).val("");
+			});
+        });
+		
+		function CarregarDados() {
+			
+		}
+		
+		//Método para cadastrar os campos
+		function Cadastrar() {
+			$('#sendCadastrar').button('loading');
+			
+			var data = $('txtCalendario').val();
+			var tipo = $('txtDescricao').val();
+			var descricao = $('selTipo').val();
+			
+			 
+		}
+	
+		//Método para Edição do registro selecionado
+		function Editar() {
+			$('#sendConfirmarEditar').button('loading');
+			
+			var data = $('txtCalendarioModal').val();
+			var tipo = $('txtDescricaoModal').val();
+			var descricao = $('selTipoModal').val();
+			
+			
+		}
+	</script>
+</head>
+
+<body>
+	
+	<!-- Painel 1 com os campos de cadastro --> 
+	<div class="panel panel-default" id="divPainel">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-3">
+					<label class="lblInputCalendario">Data: </label>
+					<input id="txtCalendario" class="form-control" name="txtCalendario" type="text"/>
+				</div>
+				
+				<div class="col-md-3">
+					<label class="lblDescricao">Descrição: </label>
+					<input id="txtDescricao" class="form-control" name="txtDescricao" type="text" maxlength="50"/>
+				</div>
+				
+				<div class="col-md-3">
+					<label class="lblInputTipo">Tipo: </label>
+					<select id="selTipo" class="form-control">
+						<option value="0">Selecione Opção</option>
+						<option value="1">Nacional</option>
+						<option value="2">Distrital</option>
+						<option value="3">Ponto Facutativo</option>
+					</select>
+				</div>
+				
+				<div class="col-md-3" id="divButton">
+					<button 
+					 type="button" 
+					 id="sendCadastrar" 
+					 class="btn btn-success" 
+					 data-loading-text="Cadastrando <i class='fa fa-refresh fa-spin'></i>" 
+					 onclick="">
+						Cadastrar
+					</button>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+
+	<!-- Painel 2 com a tabela com os registros --> 
+	<div class="panel panel-default" id="divPainel2">
+		<div class="panel-body">
+			<div class="container">
+				<div class="tab-content">
+					<div id="menu1" class="tab-pane active">
+						 <div class="wrap">
+							<table id="cabecalho" class="table" style="margin-bottom: 0px !important;">
+								<thead>
+									<tr>
+										<th>
+											<input placeholder="Data" class="form-control" type="text" id="txtCalendarioFiltro"/>
+										</th>      
+										<th>       
+											<input placeholder="Descrição" class="form-control" type="text" id="txtDescricaoFiltro"/>
+										</th>
+										<th>
+											<input placeholder="Tipo" class="form-control" type="text" id="txtTipoFiltro"/>
+										</th>
+										<th style="vertical-align: middle;">Operação</th>
+									</tr>
+								</thead>
+							</table>
+							
+							<div class="inner_table">
+								<table id="tabela" class="table table-hover">
+									<tr>
+										<td data-datacadastro="30/08/2016">30/08/2016</td>
+										<td data-descricao="Teste">Teste</td>
+										<td data-tipo="1">Nacional</td>
+										
+										<td>
+											<button 
+												 type="button" 
+												 class="btn btn-primary btn-sm">
+													Editar
+											</button>
+										</td>
+									</tr>
+									
+									<tr>	
+										<td data-datacadastro="10/08/2016">10/08/2016</td>
+										<td data-descricao="Teste">Teste</td>
+										<td data-tipo="3">Ponto Facutativo</td>
+										
+										<td>
+											<button 
+												 type="button" 
+												 class="btn btn-primary btn-sm">
+													Editar
+											</button>
+										</td>
+									</tr>
+									
+									<tr>
+										<td data-datacadastro="10/08/2016">10/08/2016</td>
+										<td data-descricao="Teste">Teste</td>
+										<td data-tipo="2">Distrital</td>
+										
+										<td>
+											<button 
+												 type="button" 
+												 class="btn btn-primary btn-sm">
+													Editar
+											</button>
+										</td>
+									</tr>
+									
+									<tr>
+										<td data-datacadastro="30/08/2016">30/08/2016</td>
+										<td data-descricao="Teste">Teste</td>
+										<td data-tipo="1">Nacional</td>
+										
+										<td>
+											<button 
+												 type="button" 
+												 class="btn btn-primary btn-sm">
+													Editar
+											</button>
+										</td>
+									</tr>
+									
+									<tr>
+										<td data-datacadastro="10/08/2016">10/08/2016</td>
+										<td data-descricao="Teste">Teste</td>
+										<td data-tipo="2">Ponto Facutativo</td>
+										
+										<td>
+											<button 
+												 type="button" 
+												 class="btn btn-primary btn-sm">
+													Editar
+											</button>
+										</td>
+									</tr>
+									
+									<tr>
+										<td data-datacadastro="10/08/2016">10/08/2016</td>
+										<td data-descricao="Teste">Teste</td>
+										<td data-tipo="3">Distrital</td>
+										
+										<td>
+											<button 
+												 type="button" 
+												 class="btn btn-primary btn-sm">
+													Editar
+											</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+							
+							
+						</div>    
+					</div>
+				</div> 
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Editar</h4>
+				</div>
+				
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-4">
+							<label class="lblInputCalendarioModal">Data: </label>
+							<input id="txtCalendarioModal" class="form-control" name="txtCalendarioModal" type="text"/>
+						</div>
+						
+						<div class="col-md-4">
+							<label class="lblDescricaoModal">Descrição: </label>
+							<input id="txtDescricaoModal" class="form-control" name="txtDescricaoModal" type="text" maxlength="50"/>
+						</div>
+						
+						<div class="col-md-4">
+							<label class="lblInputTipoModal">Tipo: </label>
+							<select id="selTipoModal" class="form-control">
+								<option value="0">Selecione Opção</option>
+								<option value="1">Nacional</option>
+								<option value="2">Distrital</option>
+								<option value="3">Ponto Facutativo</option>
+							</select>
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					<button 
+						type="button"
+						id="sendConfirmarEditar"
+						class="btn btn-success" 
+						data-dismiss="modal" 
+						data-loading-text="Editando <i class='fa fa-refresh fa-spin'></i>" 
+						onclick="Editar();">
+						Confirmar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>
