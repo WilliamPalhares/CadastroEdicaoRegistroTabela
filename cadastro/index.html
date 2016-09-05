@@ -83,7 +83,7 @@
 				$('#txtDescricaoModal').val(descricao);
 				$('#selTipoModal').val(tipo);
 				
-				//Chamada para Modal
+				//Chamada para Modal de Edição
 				$("#myModal").modal();
 			});
 			
@@ -120,6 +120,13 @@
 			$("#tabela input").blur(function(){
 				$(this).val("");
 			});
+			
+			$(document).on("click", ".btn-danger", function(){
+				//Chamada para Modal de Exclusão
+				$("#myModalExclusao").modal();
+			});
+			
+			
         });
 		
 		function CarregarDados() {
@@ -144,6 +151,12 @@
 			var data = $('txtCalendarioModal').val();
 			var tipo = $('txtDescricaoModal').val();
 			var descricao = $('selTipoModal').val();
+			
+			
+		}
+		
+		function Excluir(id) {
+			
 			
 			
 		}
@@ -228,6 +241,11 @@
 												 class="btn btn-primary btn-sm">
 													Editar
 											</button>
+											<button 
+												 type="button" 
+												 class="btn btn-danger btn-sm">
+													Excluir
+											</button>
 										</td>
 									</tr>
 									
@@ -241,6 +259,11 @@
 												 type="button" 
 												 class="btn btn-primary btn-sm">
 													Editar
+											</button>
+											<button 
+												 type="button" 
+												 class="btn btn-danger btn-sm">
+													Excluir
 											</button>
 										</td>
 									</tr>
@@ -256,6 +279,11 @@
 												 class="btn btn-primary btn-sm">
 													Editar
 											</button>
+											<button 
+												 type="button" 
+												 class="btn btn-danger btn-sm">
+													Excluir
+											</button>
 										</td>
 									</tr>
 									
@@ -269,6 +297,11 @@
 												 type="button" 
 												 class="btn btn-primary btn-sm">
 													Editar
+											</button>
+											<button 
+												 type="button" 
+												 class="btn btn-danger btn-sm">
+													Excluir
 											</button>
 										</td>
 									</tr>
@@ -284,6 +317,11 @@
 												 class="btn btn-primary btn-sm">
 													Editar
 											</button>
+											<button 
+												 type="button" 
+												 class="btn btn-danger btn-sm">
+													Excluir
+											</button>
 										</td>
 									</tr>
 									
@@ -298,6 +336,11 @@
 												 class="btn btn-primary btn-sm">
 													Editar
 											</button>
+											<button 
+												 type="button" 
+												 class="btn btn-danger btn-sm">
+													Excluir
+											</button>
 										</td>
 									</tr>
 								</table>
@@ -311,7 +354,7 @@
 		</div>
 	</div>
 	
-	<!-- Modal -->
+	<!-- Modal Edição -->
 	<div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -346,7 +389,7 @@
 				</div>
 				
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 					<button 
 						type="button"
 						id="sendConfirmarEditar"
@@ -355,6 +398,39 @@
 						data-loading-text="Editando <i class='fa fa-refresh fa-spin'></i>" 
 						onclick="Editar();">
 						Confirmar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal Exclusão -->
+	<div class="modal fade" id="myModalExclusao" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Excluir</h4>
+				</div>
+				
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-11">
+							<span>Você tem certeza que deseja excluir esse registro?</span>
+						</div>				
+					</div>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button 
+						type="button"
+						id="sendConfirmarExclusao"
+						class="btn btn-success" 
+						data-dismiss="modal" 
+						data-loading-text="Excluindo <i class='fa fa-refresh fa-spin'></i>" 
+						onclick="Excluir();">
+						Excluir
 					</button>
 				</div>
 			</div>
